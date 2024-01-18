@@ -11,5 +11,10 @@ namespace BookStore.BL.Interfaces
         void Add(Book book);
 
         void Remove(int id);
+
+        public List<Book>
+           GetAllByAuthorAfterReleaseDate(
+               int authorId,
+               DateTime afterDate);
     }
 }

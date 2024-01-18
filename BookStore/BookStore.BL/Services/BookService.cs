@@ -33,5 +33,16 @@ namespace BookStore.BL.Services
         {
            _bookRepository.Remove(id);
         }
+
+        public List<Book> GetAllByAuthorAfterReleaseDate
+            (int authorId, DateTime afterDate)
+        {
+            var result =
+                _bookRepository.GetAllByAuthor(authorId);
+
+            return result
+                .Where(b => b.ReleaseDate >= afterDate)
+                .ToList();
+        }
     }
 }

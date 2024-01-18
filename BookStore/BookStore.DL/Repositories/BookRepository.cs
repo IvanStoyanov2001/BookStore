@@ -27,5 +27,12 @@ namespace BookStore.DL.Repositories
             var author = GetById(id);
             InMemoryDb.BookData.Remove(author);
         }
+
+        public List<Book> GetAllByAuthor(int authorId)
+        {
+            return InMemoryDb.BookData
+                .Where(b => b.AuthorId == authorId)
+                .ToList();
+        }
     }
 }
