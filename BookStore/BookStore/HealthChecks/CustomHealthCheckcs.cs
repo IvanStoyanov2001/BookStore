@@ -7,19 +7,19 @@ namespace BookStore.Healthchecks
         public Task<HealthCheckResult>
             CheckHealthAsync(
                 HealthCheckContext context,
-                CancellationToken cancellationToken
-                    = new CancellationToken())
+                CancellationToken cancellationToken = new CancellationToken())
         {
-            try
+            var isHealthy = false;
+
+            if (isHealthy)
             {
                 return Task.FromResult(
-                    HealthCheckResult.Healthy("OK"));
+                    HealthCheckResult.Healthy("A healthy result."));
             }
-            catch (Exception e)
-            {
-                return Task.FromResult(
-                    HealthCheckResult.Unhealthy(e.Message));
-            }
+
+            return Task.FromResult(
+                new HealthCheckResult(
+                    context.Registration.FailureStatus, "An unhealthy result."));
         }
     }
 }

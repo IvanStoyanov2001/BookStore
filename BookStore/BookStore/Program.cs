@@ -2,6 +2,9 @@ using BookStore.BL.Interfaces;
 using BookStore.BL.Services;
 using BookStore.DL.Interfaces;
 using BookStore.DL.Repositories;
+using BookStore.Healthchecks;
+using FluentValidation;
+using FluentValidation.AspNetCore;
 
 namespace BookStore
 {
@@ -30,6 +33,14 @@ namespace BookStore
             builder.Services
                 .AddValidatorsFromAssemblyContaining(typeof(Program));
 
+            builder.Services.AddHealthChecks()
+                .AddCheck<CustomHealthCheck>(nameof(CustomHealthCheck));
+
+            builder.Services
+                .AddFluentValidationAutoValidation();
+            builder.Services
+                .AddValidatorsFromAssemblyContaining(typeof(Program));
+
 
 
             var app = builder.Build();
@@ -45,6 +56,7 @@ namespace BookStore
 
             app.UseAuthorization();
 
+            app.MapHealthChecks("/healthz");
 
             app.MapControllers();
 
