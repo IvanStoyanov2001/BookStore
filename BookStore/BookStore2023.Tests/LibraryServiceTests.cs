@@ -16,7 +16,7 @@ namespace BookStore.Tests
                 new Author()
                 {
                     Id = 1,
-                    Name = "Name 1",
+                    Name = "Skoda",
                     BirthDay = DateTime.Now
                 },
                 new Author()
